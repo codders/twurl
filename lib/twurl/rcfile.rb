@@ -62,6 +62,7 @@ module Twurl
     end
 
     def aliases
+      data['aliases'] ||= {}
       data['aliases']
     end
 

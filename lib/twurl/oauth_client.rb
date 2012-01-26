@@ -59,6 +59,7 @@ module Twurl
       @consumer_secret = options['consumer_secret']
       @token           = options['token']
       @secret          = options['secret']
+      @host            = options['host']
       configure_http!
     end
 
@@ -159,11 +160,11 @@ module Twurl
     end
 
     def consumer
-      @consumer ||=
+      @consumer ||= 
         OAuth::Consumer.new(
           consumer_key,
           consumer_secret,
-          :site => Twurl.options.base_url
+          :site => (@host || Twurl.options.base_url)
         )
     end
 
