@@ -60,6 +60,7 @@ module Twurl
       @token           = options['token']
       @secret          = options['secret']
       @host            = options['host']
+      @protocol        = options['protocol']
       configure_http!
     end
 
@@ -153,7 +154,7 @@ module Twurl
 
     def configure_http!
       consumer.http.set_debug_output(Twurl.options.debug_output_io) if Twurl.options.trace
-      if Twurl.options.ssl?
+      if (Twurl.options.ssl? or @protocol == "https") and @protocol != "http"
         consumer.http.use_ssl     = true
         consumer.http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       end
